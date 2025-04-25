@@ -1,28 +1,21 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Meu Dashboard", layout="wide")
+st.set_page_config(page_title="BASE DE DADOS AVANÇADA", layout="wide")
 
 # Título
-st.title("📊 Meu Primeiro Dashboard com Streamlit")
+st.title("👟⚽🎒👕 PRÉ-VENDA-SS26")
 
-# Subtítulo
-st.markdown("Exemplo simples com Streamlit + gráfico + tabela")
+# Caminho do arquivo Excel local
+caminho_arquivo = r"C:\Users\gomesraf\OneDrive - adidas\Documents\VS_Code\Carteiras_2024\CARTEIRA_DI_GASPI_24.04.xlsx"
 
-# Dados de exemplo
-df = pd.DataFrame({
-    "Categoria": ["A", "B", "C"],
-    "Valores": [100, 150, 200]
-})
+try:
+    df = pd.read_excel(caminho_arquivo)
 
-# Mostrar tabela
-st.subheader("Tabela de Dados")
-st.dataframe(df)
-
-# Mostrar gráfico
-st.subheader("Gráfico de Barras")
-fig, ax = plt.subplots()
-ax.bar(df["Categoria"], df["Valores"], color="skyblue")
-ax.set_title("Valores por Categoria")
-st.pyplot(fig)
+    # Mostrar a tabela
+    st.subheader("🖥️ INFORMAÇÕES")
+    st.dataframe(df)
+except FileNotFoundError:
+    st.error("Arquivo não encontrado. Verifique o caminho.")
+except Exception as e:
+    st.error(f"Ocorreu um erro ao ler o arquivo: {e}")
